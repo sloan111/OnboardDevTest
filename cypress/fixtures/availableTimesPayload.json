@@ -1,0 +1,10 @@
+{
+    "operationName": "cappedAvailableTimes",
+    "variables": {
+      "minimumDate": "2023-09-23T18:42:49.475Z",
+      "maximumDate": "2023-10-04T18:42:49.475Z",
+      "state": "florida",
+      "treatmentShortId": "weightloss"
+    },
+    "query": "query cappedAvailableTimes($state: String!, $treatmentShortId: String!, $minimumDate: timestamptz!, $maximumDate: timestamptz!) { cappedAvailableTimes: appointment_capped_available_appointment_slots( where: {start_time: {_gt: $minimumDate, _lt: $maximumDate}, state: {_eq: $state}, treatment_object: {short_id: {_eq: $treatmentShortId}}, language: {_eq: \"en-US\"}, provider: {_and: {id: {_is_null: false}}}} order_by: {start_time: asc} ) { ...CappedAvailableSlotsFragment __typename } } fragment CappedAvailableSlotsFragment on appointment_capped_available_appointment_slots { startTime: start_time endTime: end_time provider { id displayName: display_name __typename } __typename }"
+  }
